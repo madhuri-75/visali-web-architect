@@ -1,35 +1,29 @@
 
-import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface SkillProps {
   name: string;
-  level: number;
   category: string;
 }
 
-const Skill = ({ name, level }: SkillProps) => {
+const Skill = ({ name }: SkillProps) => {
   return (
     <div className="mb-4">
-      <div className="flex justify-between mb-1">
-        <span className="font-medium">{name}</span>
-        <span className="text-primary">{level}%</span>
-      </div>
-      <Progress value={level} className="h-2" />
+      <span className="font-medium">{name}</span>
     </div>
   );
 };
 
 const SkillsSection = () => {
   const skills: SkillProps[] = [
-    { name: "Python", level: 85, category: "languages" },
-    { name: "JavaScript", level: 80, category: "languages" },
-    { name: "Java", level: 75, category: "languages" },
-    { name: "HTML/CSS", level: 90, category: "frontend" },
-    { name: "React", level: 75, category: "frontend" },
-    { name: "Machine Learning", level: 70, category: "ai" },
-    { name: "Problem Solving", level: 85, category: "soft" },
-    { name: "Data Structures", level: 80, category: "computer-science" }
+    { name: "Python", category: "languages" },
+    { name: "JavaScript", category: "languages" },
+    { name: "Java", category: "languages" },
+    { name: "HTML/CSS", category: "frontend" },
+    { name: "React", category: "frontend" },
+    { name: "Machine Learning", category: "ai" },
+    { name: "Problem Solving", category: "soft" },
+    { name: "Data Structures", category: "computer-science" }
   ];
 
   // Group skills by category
@@ -55,9 +49,11 @@ const SkillsSection = () => {
             <Card key={key} className="bg-card/50 border-primary/10 shadow-lg">
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-6 gradient-text">{category.title}</h3>
-                {category.skills.map((skill, index) => (
-                  <Skill key={index} {...skill} />
-                ))}
+                <div className="grid grid-cols-2 gap-4">
+                  {category.skills.map((skill, index) => (
+                    <Skill key={index} {...skill} />
+                  ))}
+                </div>
               </CardContent>
             </Card>
           ))}
